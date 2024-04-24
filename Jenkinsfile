@@ -18,6 +18,6 @@ pipeline {
                 sh 'pm2 start --name react_test npm -- start'
             }
         }    
-        }
     }
 }
+
