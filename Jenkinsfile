@@ -1,6 +1,9 @@
 pipeline {
     agent any
     stages {
+        tools {
+        nodejs 'node16'
+        } 
 
         stage('Deploy'){
             steps {
