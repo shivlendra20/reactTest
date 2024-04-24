@@ -3,16 +3,22 @@ pipeline {
     tools {
         nodejs 'node16'
     } 
-    
-    
     stages {
+       stage('StatusCheck'){
+        sh 'systemctl status apache2'
+       } 
 
+       stage('Dependencies'){
+        sh 'npm install'    
+       }
+       
+       stage('Build'){
+        sh 'npm run build'
+       }
 
-        stage('Deploy'){
-            steps {
-                sh 'pm2 start --name react_test npm -- start'
-            }
-        }    
+       stage('Deploy'){
+        sh 'sudo mv build/* /var/www/html'
+       }
     }
 }
 
