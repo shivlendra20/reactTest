@@ -18,12 +18,6 @@ pipeline {
                 sh 'systemctl status apache2'
             }
         }
-        stage('NodeStatus') {
-            steps {
-                sh 'node -v'
-                sh 'npm -v'
-            }
-        }
         stage('Dependencies') {
             steps {
                 sh 'npm install'
