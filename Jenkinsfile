@@ -12,7 +12,7 @@ pipeline {
         stage('NodeStatus') {
             steps {
                 sh 'node -v'
-                sh 'npm install -g npm@latestnpm'
+                sh 'npm install -g npm@8.19.4'
                 sh 'npm -v'
             }
         } 
