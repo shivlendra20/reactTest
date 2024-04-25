@@ -19,6 +19,7 @@ pipeline {
 
        stage('Dependencies'){
         steps{
+            sh 'node -v'
             sh 'npm install --verbose' 
         }
            
