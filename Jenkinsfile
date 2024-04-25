@@ -4,10 +4,12 @@ pipeline {
         stage('Setup Node.js') {
             steps {
                 // Load NVM
-                sh 'export NVM_DIR="$HOME/.nvm"'
-                sh '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
-                sh 'nvm install 16'  // Install Node.js version 16
-                sh 'nvm use 16'      // Use Node.js version 16
+                sh '''
+                export NVM_DIR="$HOME/.nvm"
+                [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                nvm install 16  # Install Node.js version 16
+                nvm use 16      # Use Node.js version 16
+                '''
             }
         }
         stage('StatusCheck') {
