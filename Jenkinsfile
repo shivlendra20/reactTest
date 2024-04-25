@@ -3,6 +3,12 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '10'))
         disableConcurrentBuilds()
     }
+
+    agent any
+    tools {
+        nodejs 'node16'
+    } 
+
     stages {
         stage('Preparation') {
             steps {
@@ -10,12 +16,6 @@ pipeline {
             }
         }
         // Other stages
-    }
-    agent any
-    tools {
-        nodejs 'node16'
-    } 
-    stages {
        stage('StatusCheck'){
         steps{
          sh 'systemctl status apache2'
