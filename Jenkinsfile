@@ -1,37 +1,40 @@
 pipeline {
     agent any
-
+    tools {
+        nodejs 'node16'
+    } 
     stages {
-        stage('NodeStatus') {
-            steps {
-                script {
-                    def nodeHome = tool name: 'node16', type: 'hudson.plugins.nodejs.tools.NodeJSInstallation'
-                    env.PATH = "${nodeHome}/bin:${env.PATH}"
-                    sh 'node -v'
-                    sh 'npm -v'
-                }
-            }
+       stage('StatusCheck'){
+        steps{
+         sh 'systemctl status apache2'
+
         }
- 
-        stage('StatusCheck') {
-            steps {
-                sh 'systemctl status apache2'
-            }
+       }
+
+       stage('Purging'){
+        steps{
+            sh 'rm -rf node_modules build'
         }
-        stage('Dependencies') {
-            steps {
-                sh 'npm install'
-            }
+       } 
+
+       stage('Dependencies'){
+        steps{
+            sh 'npm install' 
         }
-        stage('Build') {
-            steps {
-                sh 'npm run build'
-            }
+           
+       }
+       
+       stage('Build'){
+        steps{
+            sh 'npm run build'
         }
-        stage('Deploy') {
-            steps {
-                sh 'cp -r build/* /var/www/html'  // Recursive copy for directories
-            }
+       }
+
+       stage('Deploy'){
+        steps{
+            sh 'sudo cp build/* /var/www/html'
         }
+        
+       }
     }
 }
