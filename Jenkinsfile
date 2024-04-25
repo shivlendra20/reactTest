@@ -13,6 +13,7 @@ pipeline {
 
        stage('Dependencies'){
         steps{
+            sh 'npm cache clean --force'
             sh 'npm install' 
         }
            
@@ -26,7 +27,7 @@ pipeline {
 
        stage('Deploy'){
         steps{
-            sh 'sudo mv build/* /var/www/html'
+            sh 'sudo cp build/* /var/www/html'
         }
         
        }
