@@ -10,12 +10,8 @@ pipeline {
 
         }
        }
-
-       stage('Purging'){
-        steps{
-            sh 'rm -rf node_modules build'
-        }
-       } 
+        
+        
 
        stage('Dependencies'){
         steps{
