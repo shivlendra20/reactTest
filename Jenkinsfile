@@ -10,23 +10,23 @@ pipeline {
 
         }
        }
-        
-       stage('Node16'){
-        steps{
-            sh 'nvm install v16.20.2'
-        }
-       }
+        stage('NodeStatus'){
+            steps{
+                sh 'sudo node -v'
+                sh 'sudo npm -v'
+            }
+        } 
 
        stage('Dependencies'){
         steps{
-            sh 'npm install' 
+            sh 'sudo npm install' 
         }
            
        }
        
        stage('Build'){
         steps{
-            sh 'npm run build'
+            sh 'sudo npm run build'
         }
        }
 
