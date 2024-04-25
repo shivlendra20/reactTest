@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        nodejs 'node20'
+        nodejs 'node16'
     } 
     stages {
        stage('StatusCheck'){
@@ -11,12 +11,12 @@ pipeline {
         }
        } 
 
-       stage('Dependencies'){
+/*       stage('Dependencies'){
         steps{
             sh 'npm install' 
         }
            
-       }
+       }*/
        
        stage('Build'){
         steps{
