@@ -1,9 +1,15 @@
 pipeline {
     agent any
-    tools {
-        nodejs 'node16'
-    } 
     stages {
+        stage('Setup Node.js') {
+            steps {
+                // Load NVM
+                sh 'export NVM_DIR="$HOME/.nvm"'
+                sh '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
+                sh 'nvm install 16'  // Install Node.js version 16
+                sh 'nvm use 16'      // Use Node.js version 16
+            }
+        }
         stage('StatusCheck') {
             steps {
                 sh 'systemctl status apache2'
@@ -12,11 +18,12 @@ pipeline {
         stage('NodeStatus') {
             steps {
                 sh 'node -v'
+                sh 'npm -v'
             }
-        } 
+        }
         stage('Dependencies') {
             steps {
-                sh 'npm install' 
+                sh 'npm install'
             }
         }
         stage('Build') {
@@ -26,7 +33,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'cp build/* /var/www/html'
+                sh 'cp -r build/* /var/www/html'  // Recursive copy for directories
             }
         }
     }
