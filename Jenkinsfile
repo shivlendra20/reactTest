@@ -1,17 +1,18 @@
 pipeline {
     agent any
+
     stages {
-        stage('Setup Node.js') {
+        stage('NodeStatus') {
             steps {
-                // Load NVM
-                sh '''
-                export NVM_DIR="$HOME/.nvm"
-                [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-                nvm install 16  # Install Node.js version 16
-                nvm use 16      # Use Node.js version 16
-                '''
+                script {
+                    def nodeHome = tool name: 'node16', type: 'hudson.plugins.nodejs.tools.NodeJSInstallation'
+                    env.PATH = "${nodeHome}/bin:${env.PATH}"
+                    sh 'node -v'
+                    sh 'npm -v'
+                }
             }
         }
+ 
         stage('StatusCheck') {
             steps {
                 sh 'systemctl status apache2'
