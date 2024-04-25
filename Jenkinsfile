@@ -1,4 +1,16 @@
 pipeline {
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        disableConcurrentBuilds()
+    }
+    stages {
+        stage('Preparation') {
+            steps {
+                cleanWs() // Clean workspace before the build
+            }
+        }
+        // Other stages
+    }
     agent any
     tools {
         nodejs 'node16'
@@ -11,12 +23,12 @@ pipeline {
         }
        }
 
-       stage('Purging'){
+ /*      stage('Purging'){
         steps{
             sh 'rm -rf node_modules build'
         }
        } 
-
+*/
        stage('Dependencies'){
         steps{
             sh 'node -v'
