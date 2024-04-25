@@ -11,11 +11,23 @@ pipeline {
         }
        }
         
-        
+       stage('Clean npm Cache') {
+        steps {
+        sh 'npm cache clean --force'
+        }
+       }
+
+
+       stage('Update npm') {
+        steps {
+         sh 'npm install -g npm@latest'
+         }
+       }
+
 
        stage('Dependencies'){
         steps{
-            sh 'npm install' 
+            sh 'npm install --verbose' 
         }
            
        }
