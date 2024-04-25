@@ -9,14 +9,20 @@ pipeline {
          sh 'systemctl status apache2'
 
         }
+       }
+
+       stage('Purging'){
+        steps{
+            sh 'rm -rf node_modules build'
+        }
        } 
 
-/*       stage('Dependencies'){
+       stage('Dependencies'){
         steps{
             sh 'npm install' 
         }
            
-       }*/
+       }
        
        stage('Build'){
         steps{
