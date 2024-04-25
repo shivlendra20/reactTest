@@ -4,38 +4,31 @@ pipeline {
         nodejs 'node16'
     } 
     stages {
-       stage('StatusCheck'){
-        steps{
-         sh 'systemctl status apache2'
-
+        stage('StatusCheck') {
+            steps {
+                sh 'systemctl status apache2'
+            }
         }
-       }
-        stage('NodeStatus'){
-            steps{
-                sh 'sudo node -v'
-                sh 'sudo npm -v'
+        stage('NodeStatus') {
+            steps {
+                sh 'node -v'
+                sh 'npm -v'
             }
         } 
-
-       stage('Dependencies'){
-        steps{
-            sh 'sudo npm install' 
+        stage('Dependencies') {
+            steps {
+                sh 'npm install' 
+            }
         }
-           
-       }
-       
-       stage('Build'){
-        steps{
-            sh 'sudo npm run build'
+        stage('Build') {
+            steps {
+                sh 'npm run build'
+            }
         }
-       }
-
-       stage('Deploy'){
-        steps{
-            sh 'sudo cp build/* /var/www/html'
+        stage('Deploy') {
+            steps {
+                sh 'cp build/* /var/www/html'
+            }
         }
-        
-       }
     }
 }
-
