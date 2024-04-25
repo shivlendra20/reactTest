@@ -11,23 +11,15 @@ pipeline {
         }
        }
         
-       stage('Clean npm Cache') {
-        steps {
-        sh 'npm cache clean --force'
+       stage('Node16'){
+        steps{
+            sh 'nvm install v16.20.2'
         }
        }
 
-
-       stage('Update npm') {
-        steps {
-         sh 'npm install -g npm@latest'
-         }
-       }
-
-
        stage('Dependencies'){
         steps{
-            sh 'npm install --verbose' 
+            sh 'npm install' 
         }
            
        }
