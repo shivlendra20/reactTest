@@ -1,7 +1,9 @@
 pipeline {
-    agent {
-        label 'node16'
-    }
+    agent any
+    tools {
+        nodejs 'node16'
+    } 
+
     
     stages {
         stage('Install Dependencies') {
