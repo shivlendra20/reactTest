@@ -34,7 +34,7 @@ pipeline {
 */
        stage('Deploy'){
         steps{
-            sh 'sudo cp build/* /var/www/html'
+            sh 'sudo cp -rvf build/* /var/www/html'
         }
         
        }
