@@ -1,8 +1,4 @@
 pipeline {
-    options {
-        buildDiscarder(logRotator(numToKeepStr: '10'))
-        disableConcurrentBuilds()
-    }
 
     agent any
     tools {
@@ -10,12 +6,6 @@ pipeline {
     } 
 
     stages {
-        stage('Preparation') {
-            steps {
-                cleanWs() // Clean workspace before the build
-            }
-        }
-        // Other stages
        stage('StatusCheck'){
         steps{
          sh 'systemctl status apache2'
@@ -32,7 +22,7 @@ pipeline {
        stage('Dependencies'){
         steps{
             sh 'node -v'
-            sh 'npm ci' 
+            sh 'npm i' 
         }
            
        }
