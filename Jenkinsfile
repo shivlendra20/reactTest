@@ -26,12 +26,12 @@ pipeline {
            
        }
        
-       stage('Build'){
+ /*      stage('Build'){
         steps{
             sh 'npm run build'
         }
        }
-
+*/
        stage('Deploy'){
         steps{
             sh 'sudo cp build/* /var/www/html'
